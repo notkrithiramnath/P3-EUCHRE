@@ -22,6 +22,26 @@ constexpr const char *const RANK_NAMES[] = {
   "King",  // KING
   "Ace"    // ACE
 };
+Card::Card() {
+  assert(false);
+}
+Suit Suit_next(Suit suit) {
+  assert(false);
+}
+
+bool Card_less(const Card &a, const Card &b, Suit trump) {
+  assert(false);
+}
+std::ostream & operator<<(std::ostream &os, const Card &card) {
+  assert(false);
+}
+
+bool operator<(const Card &lhs, const Card &rhs) {
+  assert(false);
+}
+
+
+
 
 //REQUIRES str represents a valid rank ("Two", "Three", ..., "Ace")
 //EFFECTS returns the Rank corresponding to str, for example "Two" -> TWO
