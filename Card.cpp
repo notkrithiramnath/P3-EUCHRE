@@ -22,9 +22,57 @@ constexpr const char *const RANK_NAMES[] = {
   "King",  // KING
   "Ace"    // ACE
 };
+
 Card::Card() {
+  
+}
+Card::Card(Rank rank_in, Suit suit_in){
+
+  rank = rank_in;
+  suit = suit_in;
+}
+//EFFECTS Returns the rank
+Rank Card::get_rank() const {
+  return rank;
+}
+
+//EFFECTS Returns the suit.  Does not consider trump.
+Suit Card::get_suit() const {
+  return suit;
+}
+
+//EFFECTS Returns the suit
+//HINT: the left bower is the trump suit!
+Suit Card::get_suit(Suit trump) const{
   assert(false);
 }
+
+//EFFECTS Returns true if card is a face card (Jack, Queen, King or Ace)
+bool Card::is_face_or_ace() const{
+
+  if(rank == JACK || rank == QUEEN || rank == KING || rank == ACE){
+    return true;
+  }
+  return false;
+}
+
+//EFFECTS Returns true if card is the Jack of the trump suit
+bool Card::is_right_bower(Suit trump) const{
+  
+  assert(false);
+}
+
+//EFFECTS Returns true if card is the Jack of the next suit
+bool Card::is_left_bower(Suit trump) const{
+  assert(false);
+}
+
+//EFFECTS Returns true if the card is a trump card.  All cards of the trump
+// suit are trump cards.  The left bower is also a trump card.
+bool Card::is_trump(Suit trump) const{
+  assert(false);
+}
+//non-member non-operator functions-------------------------------------
 Suit Suit_next(Suit suit) {
   assert(false);
 }
@@ -32,13 +80,58 @@ Suit Suit_next(Suit suit) {
 bool Card_less(const Card &a, const Card &b, Suit trump) {
   assert(false);
 }
-std::ostream & operator<<(std::ostream &os, const Card &card) {
+bool Card_less(const Card &a, const Card &b, const Card &led_card, Suit trump){
+  assert(false);
+}
+//OPERATORS------------------------------------------------------------
+
+
+//EFFECTS Returns true if lhs is lower value than rhs.
+//  Does not consider trump.
+bool operator<(const Card &lhs, const Card &rhs){
+  
+  if(lhs.get_rank() < rhs.get_rank()){
+    return true;
+  }
+  else if(lhs.get_rank() == rhs.get_rank()){
+    if(lhs.get_suit() < rhs.get_suit()){
+      return true;
+    }
+  }
+  return false;
+}
+
+//EFFECTS Returns true if lhs is lower value than rhs or the same card as rhs.
+//  Does not consider trump.
+bool operator<=(const Card &lhs, const Card &rhs){
   assert(false);
 }
 
-bool operator<(const Card &lhs, const Card &rhs) {
+//EFFECTS Returns true if lhs is higher value than rhs.
+//  Does not consider trump.
+bool operator>(const Card &lhs, const Card &rhs){
   assert(false);
 }
+
+//EFFECTS Returns true if lhs is higher value than rhs or the same card as rhs.
+//  Does not consider trump.
+bool operator>=(const Card &lhs, const Card &rhs){
+  assert(false);
+}
+
+//EFFECTS Returns true if lhs is same card as rhs.
+//  Does not consider trump.
+bool operator==(const Card &lhs, const Card &rhs){
+  assert(false);
+}
+
+//EFFECTS Returns true if lhs is not the same card as rhs.
+//  Does not consider trump.
+bool operator!=(const Card &lhs, const Card &rhs){
+  assert(false);
+}
+
+
 
 
 

@@ -10,6 +10,22 @@ TEST(test_card_ctor) {
     ASSERT_EQUAL(ACE, c.get_rank());
     ASSERT_EQUAL(HEARTS, c.get_suit());
 }
+TEST(test_getRank){
+    Card c(KING, HEARTS);
+    ASSERT_EQUAL(KING, c.get_rank());
+}
+TEST(test_getSuit){
+    Card c(KING, HEARTS);
+    ASSERT_EQUAL(HEARTS, c.get_suit());
+}
+TEST(test_isFaceOrAceTrue){
+    Card c(QUEEN, HEARTS);
+    ASSERT_TRUE(c.is_face_or_ace());
+}
+TEST(isFaceOrAceFalse){
+    Card c(TWO, SPADES);
+    ASSERT_FALSE(c.is_face_or_ace());
+}
 
 // Add more test cases here
 
