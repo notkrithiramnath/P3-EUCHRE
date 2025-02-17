@@ -59,22 +59,34 @@ bool Card::is_face_or_ace() const{
 //EFFECTS Returns true if card is the Jack of the trump suit
 bool Card::is_right_bower(Suit trump) const{
   
-  assert(false);
+  if(suit == trump && rank == JACK){
+    return true;
+  }
+  return false;
 }
 
 //EFFECTS Returns true if card is the Jack of the next suit
 bool Card::is_left_bower(Suit trump) const{
-  assert(false);
+  if(suit == Suit_next(trump) && rank == JACK){
+    return true;
+  }
+  return false;
 }
 
 //EFFECTS Returns true if the card is a trump card.  All cards of the trump
 // suit are trump cards.  The left bower is also a trump card.
 bool Card::is_trump(Suit trump) const{
-  assert(false);
+  if(suit == trump){
+    return true;
+  }
+  if(rank == JACK && is_left_bower(trump) == trump){
+    return true;
+  }
+  return false;
 }
 //non-member non-operator functions-------------------------------------
 Suit Suit_next(Suit suit) {
-  assert(false);
+  return static_cast<Suit>((suit + 1) % 4);//mod 4 to wrap around
 }
 
 bool Card_less(const Card &a, const Card &b, Suit trump) {
