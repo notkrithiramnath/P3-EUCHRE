@@ -109,6 +109,7 @@ bool Card_less(const Card &a, const Card &b, Suit trump) {
   }
   return (a<b);
 }
+
 bool Card_less(const Card &a, const Card &b, const Card &led_card, Suit trump){
 
   //checks trumps
