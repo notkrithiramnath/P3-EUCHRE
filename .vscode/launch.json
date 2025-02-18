@@ -8,9 +8,9 @@
             "type": "lldb",
             "request": "launch",
             "name": "Debug",
-            "program": "/Users/muskanrekhani/Documents/GitHub/P3-EUCHRE/Card_tests.exe",
+            "program": "${workspaceFolder}/Card_tests.exe",
             "args": [],
-            "cwd": "/Users/muskanrekhani/Documents/GitHub/P3-EUCHRE"
+            "cwd": "${workspaceFolder}"
         }
     ]
 }
