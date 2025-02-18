@@ -24,7 +24,8 @@ constexpr const char *const RANK_NAMES[] = {
 };
 
 Card::Card() {
-  
+  rank = TWO;
+  suit = SPADES;
 }
 Card::Card(Rank rank_in, Suit suit_in){
 
@@ -133,7 +134,9 @@ bool operator>(const Card &lhs, const Card &rhs){
 bool operator>=(const Card &lhs, const Card &rhs){
   if(lhs.get_rank() > rhs.get_rank() || lhs.get_rank() == rhs.get_rank()){
     return true;
+    
   }
+  return false;
 }
 
 //EFFECTS Returns true if lhs is same card as rhs.
@@ -224,6 +227,23 @@ std::istream & operator>>(std::istream &is, Suit &suit) {
   if (is >> str) {
     suit = string_to_suit(str);
   }
+  return is;
+}
+//EFFECTS Prints Card to stream, for example "Two of Spades"
+std::ostream & operator<<(std::ostream &os, const Card &card){
+  os << card.get_rank() << " of " << card.get_suit();
+  return os;
+}
+
+//EFFECTS Reads a Card from a stream in the format "Two of Spades"
+//NOTE The Card class declares this operator>> "friend" function,
+//     which means it is allowed to access card.rank and card.suit.
+std::istream & operator>>(std::istream &is, Card &card){
+  string rank;
+  string suit;
+  is >> rank >> suit;
+  card.rank = string_to_rank(rank);
+  card.suit = string_to_suit(suit);
   return is;
 }
 

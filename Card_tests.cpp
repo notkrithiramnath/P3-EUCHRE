@@ -26,6 +26,19 @@ TEST(isFaceOrAceFalse){
     Card c(TWO, SPADES);
     ASSERT_FALSE(c.is_face_or_ace());
 }
+TEST(test_isrightbowerTrue){
+    Card c(JACK, SPADES);
+    ASSERT_TRUE(c.is_right_bower(SPADES));
+}
+TEST(test_isrightbowerFALSE){
+    Card c(JACK, SPADES);
+    ASSERT_EQUAL(c.is_right_bower(HEARTS), false);
+
+}
+TEST(test_isleftbowerTrue){
+    Card c(JACK, SPADES);
+    ASSERT_TRUE(c.is_left_bower(CLUBS));
+}
 
 // Add more test cases here
 
