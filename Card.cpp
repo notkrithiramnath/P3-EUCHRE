@@ -44,7 +44,10 @@ Suit Card::get_suit() const {
 //EFFECTS Returns the suit
 //HINT: the left bower is the trump suit!
 Suit Card::get_suit(Suit trump) const{
-  assert(false);
+  if(is_left_bower(trump)){
+    return trump;
+  }
+  return suit;
 }
 
 //EFFECTS Returns true if card is a face card (Jack, Queen, King or Ace)
@@ -79,7 +82,7 @@ bool Card::is_trump(Suit trump) const{
   if(suit == trump){
     return true;
   }
-  if(rank == JACK && is_left_bower(trump) == trump){
+  if(rank == JACK && is_left_bower(trump)){
     return true;
   }
   return false;
@@ -90,10 +93,66 @@ Suit Suit_next(Suit suit) {
 }
 
 bool Card_less(const Card &a, const Card &b, Suit trump) {
-  assert(false);
+  if(a.get_rank() == JACK && b.get_rank() == JACK){
+    if(a.get_rank() == JACK && a.is_right_bower(trump)){
+      return false;
+    }
+    else{
+    return true;
+    }
+  }
+  if(a.get_rank() == JACK){
+    return false;
+  }
+  if(b.get_rank() == JACK){
+    return true;
+  }
+  return (a<b);
 }
 bool Card_less(const Card &a, const Card &b, const Card &led_card, Suit trump){
-  assert(false);
+
+  //checks trumps
+  if(a.get_suit() == trump && b.get_suit() != trump){
+    return false;
+  }
+
+  if(a.get_suit() != trump && b.get_suit() == trump){
+    return true;
+  }
+
+  if(led_card.get_suit() == trump && a.get_suit() == trump && b.get_suit() == trump){
+    if(a.get_rank() == JACK && b.get_rank() == JACK){
+    if(a.get_rank() == JACK && a.is_right_bower(trump)){
+      return false;
+    }
+    else{
+    return true;
+    }
+  }
+  if(a.get_rank() == JACK){
+    return false;
+  }
+  if(b.get_rank() == JACK){
+    return true;
+  }
+  return (a<b);
+  }
+
+  //if not trumps then check following suit
+  if(a.get_suit() == led_card.get_suit() && b.get_suit() != led_card.get_suit()){
+    return false;
+  }
+
+  else if(a.get_suit() != led_card.get_suit() && b.get_suit() == led_card.get_suit()){
+    return true;
+  }
+
+  else if(a.get_suit() == led_card.get_suit() && b.get_suit() == led_card.get_suit()){
+    return (a<b);
+  }
+
+  return (a<b);
+
 }
 //OPERATORS------------------------------------------------------------
 
