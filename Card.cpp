@@ -194,6 +194,9 @@ bool operator>=(const Card &lhs, const Card &rhs){
   if(lhs.get_rank() > rhs.get_rank() || lhs.get_rank() == rhs.get_rank()){
     return true;
   }
+  else{
+    return false;
+  }
 }
 
 //EFFECTS Returns true if lhs is same card as rhs.
