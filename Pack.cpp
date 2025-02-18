@@ -19,31 +19,20 @@
   // NOTE: The standard order is the same as that in pack.in.
   // NOTE: Do NOT use pack.in in your implementation of this function
   // NOTE: The pack is initially full, with no cards dealt.
-
-
-
-  // Pack(){
-  //   assert(false)}
-
-
-
+  Pack(){
+    assert(false)}
 
   // REQUIRES: pack_input contains a representation of a Pack in the
   //           format required by the project specification
   // MODIFIES: pack_input
   // EFFECTS: Initializes Pack by reading from pack_input.
   // NOTE: The pack is initially full, with no cards dealt.
-  
-
-  // Pack(istream& pack_input){
+  Pack(istream& pack_input){
     
-  // }
-
-
+  }
 
   // REQUIRES: cards remain in the Pack
   // EFFECTS: Returns the next card in the pack and increments the next index
-
   Card deal_one(){
 
   }
