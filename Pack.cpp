@@ -20,9 +20,20 @@
   // NOTE: Do NOT use pack.in in your implementation of this function
   // NOTE: The pack is initially full, with no cards dealt.
   Pack::Pack(){
-    
-  }
+    int count = 0;
+    for (int s = SPADES; s <= DIAMONDS; ++s) {
+      Suit suit = static_cast<Suit>(s);
+      for(int r = NINE; r <=ACE; r++){
+        Rank rank = static_cast<Rank>(r);
+        Card card(rank, suit);
+        cards[count] = card;
+        count++;
 
+      }
+    }
+  }
+  //make Pack_public_tests.exe
+//./Pack_public_tests.exe
   // REQUIRES: pack_input contains a representation of a Pack in the
   //           format required by the project specification
   // MODIFIES: pack_input
