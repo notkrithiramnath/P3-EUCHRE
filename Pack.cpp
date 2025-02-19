@@ -11,7 +11,8 @@
 #include <vector>
 #include <cassert>
 #include "Pack.hpp"
-
+//make Pack_public_tests.exe
+// ./Pack_public_tests.exe
   // EFFECTS: Initializes the Pack to be in the following standard order:
   //          the cards of the lowest suit arranged from lowest rank to
   //          highest rank, followed by the cards of the next lowest suit
@@ -21,16 +22,22 @@
   // NOTE: The pack is initially full, with no cards dealt.
   Pack::Pack(){
     int count = 0;
-    for (int s = SPADES; s <= DIAMONDS; ++s) {
+    for (int s = SPADES; s <= DIAMONDS; s++) {
       Suit suit = static_cast<Suit>(s);
+      //std::cout << "Suit: " << suit << std::endl;
       for(int r = NINE; r <=ACE; r++){
         Rank rank = static_cast<Rank>(r);
+        //std::cout << "Rank: " << rank << std::endl;
         Card card(rank, suit);
+        
         cards[count] = card;
+        //std::cout << "Added " << cards[count] << " at index " << count << std::endl;
         count++;
 
       }
     }
+
+    next = 0;
   }
   //make Pack_public_tests.exe
 //./Pack_public_tests.exe
@@ -50,8 +57,9 @@
   // REQUIRES: cards remain in the Pack
   // EFFECTS: Returns the next card in the pack and increments the next index
   Card Pack::deal_one(){
+    Card card = cards[next];
     next++;
-    return cards[next];
+    return card;
 
   }
   // EFFECTS: Resets next index to first card in the Pack
@@ -87,10 +95,8 @@
 
   // EFFECTS: returns true if there are no more cards left in the pack
   bool Pack::empty() const{
-    if(cards.size() == 0){
-      return true;
-    }
-    return false;
+    //if next is card size then no more cards left
+    return next >= cards.size();
   }
   
 
