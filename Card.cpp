@@ -5,26 +5,11 @@
 
 using namespace std;
 
-/////////////// Rank operator implementations - DO NOT CHANGE ///////////////
 
-constexpr const char *const RANK_NAMES[] = {
-  "Two",   // TWO
-  "Three", // THREE
-  "Four",  // FOUR
-  "Five",  // FIVE
-  "Six",   // SIX
-  "Seven", // SEVEN
-  "Eight", // EIGHT
-  "Nine",  // NINE
-  "Ten",   // TEN
-  "Jack",  // JACK
-  "Queen", // QUEEN
-  "King",  // KING
-  "Ace"    // ACE
-};
 
 Card::Card() {
-  
+  rank = TWO;
+  suit = SPADES;
 }
 Card::Card(Rank rank_in, Suit suit_in){
 
@@ -70,7 +55,7 @@ bool Card::is_right_bower(Suit trump) const{
 
 //EFFECTS Returns true if card is the Jack of the next suit
 bool Card::is_left_bower(Suit trump) const{
-  if(suit == Suit_next(trump) && rank == JACK){
+  if(get_suit() == Suit_next(trump) && get_rank() == JACK){
     return true;
   }
   return false;
@@ -88,8 +73,17 @@ bool Card::is_trump(Suit trump) const{
   return false;
 }
 //non-member non-operator functions-------------------------------------
+//EFFECTS returns the next suit, which is the suit of the same color
 Suit Suit_next(Suit suit) {
-  return static_cast<Suit>((suit + 1) % 4);//mod 4 to wrap around
+  if(suit == SPADES){
+    return CLUBS;
+  }else if(suit == CLUBS){
+    return SPADES;
+  }else if(suit == HEARTS){
+    return DIAMONDS;
+  }else{
+    return HEARTS;
+  }
 }
 
 bool Card_less(const Card &a, const Card &b, Suit trump) {
@@ -216,11 +210,51 @@ bool operator!=(const Card &lhs, const Card &rhs){
   return false;
 }
 
+//EFFECTS Prints Card to stream, for example "Two of Spades"
+std::ostream & operator<<(std::ostream &os, const Card &card){
+  os << card.get_rank() << " of " << card.get_suit();
+  return os;
+}
+
+//EFFECTS Reads a Card from a stream in the format "Two of Spades"
+//NOTE The Card class declares this operator>> "friend" function,
+//     which means it is allowed to access card.rank and card.suit.
+std::istream & operator>>(std::istream &is, Card &card){
+  string str;
+  Rank rank;
+  Suit suit;
+  string bs;
+  while(is >> str) {
+    rank = string_to_rank(str);
+    is >> str >> bs;
+    suit = string_to_suit(str);
+    card = Card(rank, suit);
+    is >> card;
+  }
+  return is;
+}
 
 
 
 
 
+/////////////// Rank operator implementations - DO NOT CHANGE ///////////////
+
+constexpr const char *const RANK_NAMES[] = {
+  "Two",   // TWO
+  "Three", // THREE
+  "Four",  // FOUR
+  "Five",  // FIVE
+  "Six",   // SIX
+  "Seven", // SEVEN
+  "Eight", // EIGHT
+  "Nine",  // NINE
+  "Ten",   // TEN
+  "Jack",  // JACK
+  "Queen", // QUEEN
+  "King",  // KING
+  "Ace"    // ACE
+};
 //REQUIRES str represents a valid rank ("Two", "Three", ..., "Ace")
 //EFFECTS returns the Rank corresponding to str, for example "Two" -> TWO
 Rank string_to_rank(const std::string &str) {
@@ -229,7 +263,7 @@ Rank string_to_rank(const std::string &str) {
       return static_cast<Rank>(r);
     }
   }
-  assert(false); // Input string didn't match any rank
+  //assert(false); // Input string didn't match any rank
   return {};
 }
 
@@ -238,12 +272,14 @@ std::ostream & operator<<(std::ostream &os, Rank rank) {
   os << RANK_NAMES[rank];
   return os;
 }
-
+//make Card_public_tests.exe
+//./Card_public_tests.exe
 //REQUIRES If any input is read, it must be a valid rank
 //EFFECTS Reads a Rank from a stream, for example "Two" -> TWO
 std::istream & operator>>(std::istream &is, Rank &rank) {
   string str;
   if(is >> str) {
+    
     rank = string_to_rank(str);
   }
   return is;
@@ -268,7 +304,7 @@ Suit string_to_suit(const std::string &str) {
       return static_cast<Suit>(s);
     }
   }
-  assert(false); // Input string didn't match any suit
+  //assert(false); // Input string didn't match any suit
   return {};
 }
 

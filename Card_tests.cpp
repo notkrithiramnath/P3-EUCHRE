@@ -10,6 +10,11 @@ TEST(test_card_ctor) {
     ASSERT_EQUAL(ACE, c.get_rank());
     ASSERT_EQUAL(HEARTS, c.get_suit());
 }
+TEST(test_card_ctorDefault) {
+    Card c;
+    ASSERT_EQUAL(TWO, c.get_rank());
+    ASSERT_EQUAL(SPADES, c.get_suit());
+}
 TEST(test_getRank){
     Card c(KING, HEARTS);
     ASSERT_EQUAL(KING, c.get_rank());
@@ -40,9 +45,13 @@ TEST(test_isleftbowerTrue){
     ASSERT_TRUE(c.is_left_bower(CLUBS));
 }
 TEST(test_suitNext){
-    ASSERT_EQUAL(Suit_next(CLUBS), DIAMONDS);
+    ASSERT_EQUAL(Suit_next(CLUBS), SPADES);
 }
-TEST(test_isTrump){
+TEST(test_isTrumpTrue){
+    Card c(TWO, SPADES);
+    ASSERT_FALSE(c.is_trump(HEARTS));
+}
+TEST(test_isTrumpFalse){
     Card c(TWO, SPADES);
     ASSERT_TRUE(c.is_trump(SPADES));
 }
@@ -56,8 +65,36 @@ TEST(test_cardLessFalse){
     Card b(THREE, SPADES);
     ASSERT_FALSE(Card_less(a, b, SPADES));
 }
-
-
+TEST(test_operatorLess){
+    Card a(THREE, SPADES);
+    Card b(NINE, SPADES);
+    ASSERT_TRUE(a < b);
+}
+TEST(test_operatorLessorEqual){
+    Card a(THREE, CLUBS);
+    Card b(THREE, CLUBS);
+    ASSERT_TRUE(a <= b);
+}
+TEST(test_operatorGreater){
+    Card a(FOUR, CLUBS);
+    Card b(THREE, CLUBS);
+    ASSERT_TRUE(a > b);
+}
+TEST(test_operatorGreaterorEqual){
+    Card a(FOUR, CLUBS);
+    Card b(FOUR, CLUBS);
+    ASSERT_TRUE(a >= b);
+}
+TEST(test_operatorEqual){
+    Card a(FOUR, CLUBS);
+    Card b(FOUR, CLUBS);
+    ASSERT_TRUE(a == b);
+}
+TEST(test_operatorNotEqual){
+    Card a(FOUR, CLUBS);
+    Card b(THREE, CLUBS);
+    ASSERT_TRUE(a != b);
+}
 // Add more test cases here
 
 TEST_MAIN()

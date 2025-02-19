@@ -57,8 +57,10 @@
   bool Pack::empty() const{
     assert(false);
   }
-  
+  // REQUIRES: cards remain in the Pack
+  // EFFECTS: Returns the next card in the pack and increments the next index
   Card Pack::deal_one(){
+    assert(false);
 
   }
 
