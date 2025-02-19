@@ -121,7 +121,7 @@ bool Card_less(const Card &a, const Card &b, const Card &led_card, Suit trump){
     return true;
   }
 
-  if(led_card.get_suit() == trump && a.get_suit() == trump && b.get_suit() == trump){
+  if(led_card.get_suit() == trump && a.is_trump(trump) && b.is_trump(trump)){
     if(a.get_rank() == JACK && b.get_rank() == JACK){
     if(a.get_rank() == JACK && a.is_right_bower(trump)){
       return false;
