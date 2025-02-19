@@ -20,13 +20,7 @@
   // NOTE: Do NOT use pack.in in your implementation of this function
   // NOTE: The pack is initially full, with no cards dealt.
   Pack::Pack(){
-    next = 0;
-    for(int SUIT = CLUBS; SUIT <= DIAMONDS; SUIT++){
-      for(int RANK = TWO; RANK <= ACE; RANK++){
-        cards[next]=Card(static_cast<Rank>(RANK), static_cast<Suit>(SUIT));
-        next++;
-      }
-    }
+    
   }
 
   // REQUIRES: pack_input contains a representation of a Pack in the
@@ -35,39 +29,58 @@
   // EFFECTS: Initializes Pack by reading from pack_input.
   // NOTE: The pack is initially full, with no cards dealt.
   Pack::Pack(std::istream& pack_input){
-    assert(false);
+    Card card;
+    while(pack_input >> card){
+      cards[next] = card;
+      next++;
+    }
   }
 
   // REQUIRES: cards remain in the Pack
   // EFFECTS: Returns the next card in the pack and increments the next index
+  Card Pack::deal_one(){
+    next++;
+    return cards[next];
 
+  }
   // EFFECTS: Resets next index to first card in the Pack
   void Pack::reset(){
-    assert(false);
+    next = 0; 
   }
 
   // EFFECTS: Shuffles the Pack and resets the next index. This
   //          performs an in shuffle seven times. See
   //          https://en.wikipedia.org/wiki/In_shuffle.
   void Pack::shuffle(){
-    assert(false);
+    for (int i = 0; i < 7; i++){
+      std::vector<Card> temp;
+      std::vector<Card> temp69;
+      
+
+      for(int i = 0; i < cards.size()/2; i++){
+        temp.push_back(cards[i]);
+      }
+      for(int i = cards.size()/2; i < cards.size(); i++){
+        temp69.push_back(cards[i]);
+      }
+      for(int i = 0; i < cards.size(); i++){
+        if(i%2==0){
+          cards[i] = temp[i/2];
+        }
+        else{
+          cards[i] = temp69[i/2];
+        }
+      }
+    }
   }
 
   // EFFECTS: returns true if there are no more cards left in the pack
   bool Pack::empty() const{
-    assert(false);
+    if(cards.size() == 0){
+      return true;
+    }
+    return false;
   }
-  // REQUIRES: cards remain in the Pack
-  // EFFECTS: Returns the next card in the pack and increments the next index
-  Card Pack::deal_one(){
-    assert(false);
+  
 
-  }
-
-
-
-  // EFFECTS: returns true if there are no more cards left in the pack
-  bool empty(){
-    return true;
-  }
 
